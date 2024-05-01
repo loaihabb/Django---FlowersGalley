@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .standardized-image {
+        max-width: 500px; /* İstediğiniz genişlik */
+        max-height: 400px; /* İstediğiniz yükseklik */
+    }
+</style>
+<header class="flex justify-center m-2 text-4xl text-black font-bold"> {{flower.title}}</header>
+<div class="flex justify-center flex-wrap row-auto">
+    <article style="background-color: #FDF0D5;"  class="max-w-5xl w-full rounded-xl overflow-hidden shadow-lg my-4 mx-3">
+        <a href="#" class="flex justify-end">
+            {% if flower.image %}
+            <img class="object-contain w-auto h-auto standardized-image" src="{{ flower.image.url }}" alt="{{ flower.title }}">
+            {% endif %}
+        </a>
+        <div class="font-mono m-2">
+            Liked By: [
+                {% for action in flower.actions.all %} {% comment %}* This action is related_name="actions" in the models {% endcomment %}
+                    {% if action.liked == True%} 
+                    <span class="text-green-400 font-mono font-bold">
+                        {{action.user.username}},
+                    </span>
+                    {% endif %}
+                {% endfor %}
+            ]
+        </div>
+        <div class="font-mono m-2">
+            Disliked By: [
+                {% for action in flower.actions.all %}
+                    {% if action.liked == False%}
+                    <span class="text-red-400 font-mono font-bold">
+                        {{action.user.username}},
+                    </span>
+                    {% endif %}
+                {% endfor %}
+            ]
+        </div>
+        <div class="font-mono m-2"> Creator: {{flower.user.username}}</div>
+        {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'interaction:like-flower' flower_id=flower.id%}" class="flex m-2 mt-4">
+                {% csrf_token %}
+                <button type="submit" value="like" name="like" class="inline-block shadow-sm text-md font-medium text-white bg-green-600 hover:bg-green-700 rounded-xl px-3 py-1 mr-2"> Like </button>
+                <button type="submit" value="dislike" name="dislike" class="inline-block shadow-sm text-md font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl px-3 py-1 mr-2"> Dislike </button>
+            </form>
+
+        {% endif %}
+        <div class="p-6" style="background-color: #780000;" >
+            {% if LANGUAGE_CODE == 'ar' %}
+            <h2 class="text-white font-bold text-xl mb-2">{{ flower.title_ar }}</h2>
+            <p class="text-white text-base h-16 overflow-hidden">{{ flower.description_ar }}</p>
+            {% else %}
+            <h2 class="text-white font-bold text-xl mb-2">{{ flower.title }}</h2>
+            <p class="text-white text-base h-16 overflow-hidden">{{ flower.description }}</p>
+            {% endif %}
+            <div class="mt-2">
+                <a style="background-color: #FDF0D5;"  href="/" class="inline-block shadow-sm text-md font-medium hover:no-underline hover:scale-110 transition-transform duration-700 text-black rounded-xl px-3 py-1 mr-2">Back</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'gallery:flower-update' pk=flower.id%}" class="font-mono font-bold inline-block text-md text-white m-2 bg-slate-900 hover:scale-110 transition-transform duration-700 hover:bg-slate-800 hover:no-underline rounded-xl px-3 py-1 mr-2"> Edit </a>
+                    <a href="{% url 'gallery:flower-delete' pk=flower.id%}" class="font-mono font-bold inline-block text-md text-white m-2 bg-slate-900 hover:scale-110 transition-transform duration-700 hover:bg-slate-800 hover:no-underline rounded-xl px-3 py-1 mr-2"> Delete </a>
+                {% endif %}
+            </div>
+            
+        </div>
+    </article>
+</div>
+{% endblock  %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="container mx-auto flex flex-wrap justify-center">
+    {% for flower in flowers %}
+    <article style="background-color: #FDF0D5;" class="max-w-xs w-full rounded-xl overflow-hidden shadow-lg mt-16 mb-10 mx-6 hover:scale-105 transition-transform duration-700">
+        <a href="{% url 'gallery:flower-detail' flower.id %}" class="block">
+            {% if flower.image %}
+            <img class="object-cover w-full h-64" src="{{ flower.image.url }}" alt="{{ flower.title }}">
+            {% endif %}
+        </a>
+        <div class="p-6">
+            {% if LANGUAGE_CODE == 'ar' %}
+            <h2 style="color: #780000;" class="font-bold text-xl mb-2">{{ flower.title_ar }}</h2>
+            <p class="text-black text-base h-16 overflow-hidden">{{ flower.description_ar }}</p>
+            {% else %}
+            <h2 style="color: #780000;"  class="font-bold text-xl mb-2">{{ flower.title }}</h2>
+            <p class="text-black text-base h-16 overflow-hidden">{{ flower.description }}</p>
+            {% endif %}
+            <div class="mt-4">
+                <a style="background-color: #003049;" href="{% url 'gallery:flower-detail' flower.id %}" class="inline-block shadow-sm text-sm font-medium text-white hover:no-underline hover:scale-110 transition-transform duration-700 rounded-xl px-3 py-1 mr-2">More</a>
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+
+
+
+    {% if user.is_authenticated %}
+    <div>
+        <a style="background-color: #003049;" href="{% url 'gallery:flower-create' %}" class="inline-block shadow-sm text-sm font-medium text-white hover:no-underline hover:scale-105 transition-transform duration-700 rounded-xl px-3 py-2 mr-2 my-2"> Create Flower</a>
+    </div>
+    {% endif %}
+
+
+<div class="container pagination text-lg">
+    <span style="color: #780000;" class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+  {% extends "base.html" %}
+
+  {% block content %}
+
+
+  <div class="container mx-auto flex flex-wrap justify-center ">
+  <div class="flex justify-center m-10 items-center">
+  <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <div class="justify-center w-96 m-2">
+          <h1 class="flex p-2 ">Title</h1>
+          <input id="title" name="title" type="text" autocomplete="title" required class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md  sm:text-sm mb-2" placeholder="Title">
+        </div>
+        <div class="justify-center w-96 m-2">
+          <h1 class="flex p-2">Arabic Title</h1>
+          <input id="title_ar" name="title_ar" type="text" autocomplete="title_ar" required class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md  sm:text-sm mb-2" placeholder="Arabic Title">
+        </div>
+        <div>
+          <h1 class="flex w-96 m-2">Image</h1>
+          <input id="image" name="image" type="file" autocomplete="image" required class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md  sm:text-sm mb-2" placeholder="Image">
+        </div>
+        <div>
+          <h1 class="p-2 m-2">Description</h1>
+          <textarea id="description" name="description" cols="30" rows="5" type="text" autocomplete="description" required class="appearance-none block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md  sm:text-sm mb-2" placeholder="Description"></textarea>
+        </div>
+        <div>
+          <h1 class="p-2 m-2">Arabic Description</h1>
+          <textarea id="description_ar" name="description_ar" cols="30" rows="5" autocomplete="description_ar" required class="appearance-none block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md  sm:text-sm mb-2" placeholder="Arabic Description"></textarea>
+        </div>
+        <div class="text-red-500 text-center"
+          {% if form.errors %}
+            <p>{{ form.errors }}</p>
+          {% endif %}
+        </div>
+        <div>
+      <input type="submit" value="Create Flower" class="w-full py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-900 hover:scale-110 transition-transform duration-700 ">
+
+  </form>
+  </div>
+  </div>
+
+
+    
+
+
+  {% endblock %}
