@@ -1,10 +1,6 @@
 {% load i18n %}
 
 <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-  <header>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-  </header>
-
   <div class="max-w-md w-full space-y-8">
     <div>
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
@@ -13,15 +9,15 @@
       {% csrf_token %}
       <div>
         <label for="username" class="sr-only">Username</label>
-        <input id="username" name="username" type="text" autocomplete="username" required class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mb-2" placeholder="Username">
+        <input id="username" name="username" type="text" autocomplete="username" required class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md sm:text-sm mb-2" placeholder="Username">
       </div>
       <div>
         <label for="password1" class="sr-only">Password</label>
-        <input id="password1" name="password1" type="password" autocomplete="new-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mb-2" placeholder="Password">
+        <input id="password1" name="password1" type="password" autocomplete="new-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md sm:text-sm mb-2" placeholder="Password">
       </div>
       <div>
         <label for="password2" class="sr-only">Confirm Password</label>
-        <input id="password2" name="password2" type="password" autocomplete="new-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mb-2" placeholder="Confirm Password">
+        <input id="password2" name="password2" type="password" autocomplete="new-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md sm:text-sm mb-2" placeholder="Confirm Password">
       </div>
 
       <div class="text-red-500 text-center">
@@ -33,13 +29,12 @@
         <button type="submit" value="Register" class="w-2/3 py-2 px-4 rounded-xl shadow-sm text-sm font-medium text-white hover:scale-110 transition-transform duration-700 bg-cyan-600">Register</button>
       </div>
       <div class="flex justify-around">
-      <p class="text-white mt-2">Already have an account?</p>
-      <a href="/accounts/login" class="flex justify-start">
-        <button type="button" class="w-full py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-cyan-600 hover:bg-cyan-700 hover:scale-110 transition-transform duration-700 ">Login</button>
-      </a>
-    </div>
+        <p class="text-white mt-2">Already have an account?</p>
+        <a href="/accounts/login" class="flex justify-start">
+          <button type="button" class="w-full py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-cyan-600 hover:bg-cyan-700 hover:scale-110 transition-transform duration-700 ">Login</button>
+        </a>
+      </div>
     </form>
-
   </div>
 </div>
 
